@@ -25,9 +25,9 @@ export default function Navi() {
         />
         <Menu.Item
           as={NavLink}
-          to="/jobPostings"
+          to="/departments"
           icon="list alternate outline"
-          content="Job Postings"
+          content="Department"
         />
         <Menu.Item
           as={NavLink}

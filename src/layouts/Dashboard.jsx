@@ -27,11 +27,7 @@ export default function Dashboard() {
       <Route exact path="/department/add" component={DepartmentAdd} />
       <Route exact path="/departments" component={DepartmentList} />
       <Route exact path="/departments/:id" component={DepartmentDetail} />
-      <Route
-        exact
-        path="/departments/:id/update"
-        component={DepartmentUpdate}
-      />
+      <Route path="/department/edit/:id" component={DepartmentUpdate} />
 
       <Footer />
     </Container>

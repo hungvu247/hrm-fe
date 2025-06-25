@@ -19,12 +19,12 @@ export default class DepartmentService {
 
   update(values) {
     return axios.put(
-      `http://localhost:7000/api/department/${values.departmentId}`,
+      `https://localhost:7000/api/Department/${values.departmentId}`,
       values
     );
   }
 
   delete(id) {
-    return axios.delete(`http://localhost:7000/api/department/${id}`);
+    return axios.delete(`http://localhost:7000/api/Department/${id}`);
   }
 }
