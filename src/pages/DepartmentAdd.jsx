@@ -1,18 +1,16 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
-import { useHistory } from "react-router-dom";
 import * as Yup from "yup";
+import { useNavigate } from "react-router-dom"; // ✅ Thêm dòng này
 import DepartmentService from "../services/departmentService";
 import { Container, Grid, Label, Form, Button } from "semantic-ui-react";
 import Headline from "../layouts/Headline";
 import MessageModal from "../layouts/MessageModal";
 
 export default function DepartmentAdd() {
-  const history = useHistory();
-  const departmentService = new DepartmentService();
-
   const [open, setOpen] = useState(false);
-  const [submitLoading, setSubmitLoading] = useState(false);
+  const departmentService = new DepartmentService();
+  const navigate = useNavigate(); // ✅ Hook điều hướng
 
   const initialValues = {
     departmentName: "",
@@ -24,8 +22,7 @@ export default function DepartmentAdd() {
     description: Yup.string(),
   });
 
-  const onSubmit = async (values) => {
-    setSubmitLoading(true);
+  const onSubmit = (values, { resetForm }) => {
     const payload = {
       DepartmentName: values.departmentName,
       Description: values.description,
@@ -33,15 +30,10 @@ export default function DepartmentAdd() {
       DepartmentBudgets: [],
     };
 
-    try {
-      await departmentService.add(payload);
-      setOpen(true); // mở modal sau khi thêm thành công
-    } catch (error) {
-      console.error("Add department failed:", error);
-      alert("Failed to add department. Please try again.");
-    } finally {
-      setSubmitLoading(false);
-    }
+    departmentService.add(payload).then(() => {
+      handleModal(true);
+      resetForm();
+    });
   };
 
   const formik = useFormik({
@@ -50,15 +42,15 @@ export default function DepartmentAdd() {
     onSubmit,
   });
 
+  const handleModal = (value) => {
+    setOpen(value);
+  };
+
   const handleModalClose = () => {
     setOpen(false);
     setTimeout(() => {
-      history.push("/department");
+      navigate("/department"); // ✅ Chuyển hướng sau khi đóng modal
     }, 500);
-  };
-
-  const handleCancel = () => {
-    history.push("/department");
   };
 
   const handleChange = (fieldName, value) => {
@@ -73,19 +65,14 @@ export default function DepartmentAdd() {
         <Grid.Row>
           <Grid.Column width="3" />
           <Grid.Column width="10">
-            <Form onSubmit={formik.handleSubmit} loading={submitLoading}>
+            <Form onSubmit={formik.handleSubmit}>
               <Form.Input
                 label="Department Name"
                 name="departmentName"
-                placeholder="Enter department name"
                 onChange={(e, data) =>
                   handleChange("departmentName", data.value)
                 }
                 value={formik.values.departmentName}
-                onBlur={formik.handleBlur}
-                error={
-                  formik.touched.departmentName && formik.errors.departmentName
-                }
               />
               {formik.touched.departmentName &&
                 formik.errors.departmentName && (
@@ -96,6 +83,7 @@ export default function DepartmentAdd() {
                     content={formik.errors.departmentName}
                   />
                 )}
+              <br />
 
               <Form.TextArea
                 label="Description"
@@ -103,8 +91,6 @@ export default function DepartmentAdd() {
                 placeholder="Optional..."
                 onChange={(e, data) => handleChange("description", data.value)}
                 value={formik.values.description}
-                onBlur={formik.handleBlur}
-                error={formik.touched.description && formik.errors.description}
               />
               {formik.touched.description && formik.errors.description && (
                 <Label
@@ -114,29 +100,15 @@ export default function DepartmentAdd() {
                   content={formik.errors.description}
                 />
               )}
-
               <br />
 
-              <div style={{ display: "flex", gap: "10px" }}>
-                <Button
-                  type="submit"
-                  color="blue"
-                  content="Add Department"
-                  circular
-                  fluid
-                  loading={submitLoading}
-                  disabled={!formik.dirty || submitLoading}
-                />
-                <Button
-                  type="button"
-                  color="grey"
-                  content="Cancel"
-                  circular
-                  fluid
-                  disabled={submitLoading}
-                  onClick={handleCancel}
-                />
-              </div>
+              <Button
+                type="submit"
+                fluid
+                color="blue"
+                circular
+                content="Add Department"
+              />
             </Form>
           </Grid.Column>
           <Grid.Column width="3" />
@@ -145,8 +117,8 @@ export default function DepartmentAdd() {
 
       <MessageModal
         open={open}
-        onOpen={() => setOpen(true)}
-        onClose={handleModalClose}
+        onOpen={() => handleModal(true)}
+        onClose={handleModalClose} // ✅ Đóng và redirect
         content="Department added successfully! Redirecting..."
         header="Success"
         size="small"

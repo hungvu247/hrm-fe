@@ -1,28 +1,29 @@
 import React, { useState, useEffect } from "react";
 import DepartmentService from "../services/departmentService";
-import { Card, Icon, Button, Grid, Dropdown, Input } from "semantic-ui-react";
-import { useHistory } from "react-router-dom";
+import { Card, Button, Grid, Dropdown, Input } from "semantic-ui-react";
+import { useNavigate } from "react-router-dom";
 
 export default function DepartmentList() {
   const [departments, setDepartments] = useState([]);
-  const [view, setView] = useState("grid"); // "list" or "grid"
+  const [view, setView] = useState("grid");
   const [search, setSearch] = useState("");
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const departmentService = new DepartmentService();
-    departmentService.getAll().then((res) => {
+    const token = localStorage.getItem("accessToken");
+    departmentService.getAll(token).then((res) => {
       setDepartments(res.data);
     });
   }, []);
 
   const goToAdd = () => {
-    history.push("/department/add");
+    navigate("/dashboard/department/add");
   };
 
   const goToEdit = (dept) => {
-    history.push({
-      pathname: `/department/edit/${dept.DepartmentId}`,
+    navigate({
+      pathname: `/dashboard/department/edit/${dept.DepartmentId}`,
       state: { department: dept },
     });
   };

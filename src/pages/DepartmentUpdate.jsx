@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import {
@@ -17,7 +17,7 @@ import MessageModal from "../layouts/MessageModal";
 
 export default function DepartmentUpdate() {
   const { id } = useParams();
-  const history = useHistory();
+  const navigate = useNavigate();
   const departmentService = new DepartmentService();
 
   const [initialValues, setInitialValues] = useState(null);
@@ -67,12 +67,12 @@ export default function DepartmentUpdate() {
   const handleModalClose = () => {
     setOpen(false);
     setTimeout(() => {
-      history.push("/department");
+      navigate("/department");
     }, 500);
   };
 
   const handleCancel = () => {
-    history.push("/department");
+    navigate("/department");
   };
 
   if (loading || !initialValues) {

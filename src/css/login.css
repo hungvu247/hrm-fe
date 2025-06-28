@@ -1,0 +1,103 @@
+/* Nền gradient với bầu trời đêm */
+.page-login {
+  background: url("../images/pexels-nurcan-aytas-2150089535-32706578.jpg")
+    no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+.page-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-form-wrapper {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 40px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+.login-form-title {
+  color: white;
+  font-size: 30px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 30px;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+}
+
+.input-group-text {
+  color: white;
+  margin-right: 10px;
+}
+
+.page-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-form-wrapper {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 40px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.login-form-title {
+  color: #fff;
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.input-login {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 30px;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+}
+
+.form-control-login {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  width: 100%;
+  font-size: 16px;
+}
+
+.form-control-login::placeholder {
+  color: #ddd;
+}
+
+.btn-login {
+  background: #fff;
+  color: #6a11cb;
+  border-radius: 30px;
+  padding: 12px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.btn-login:hover {
+  background: #eee;
+}
