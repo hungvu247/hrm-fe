@@ -1,17 +1,9 @@
 import axios from "axios";
 
-export default class AuthService {
+const API_URL = "https://localhost:7000/api";
 
-    registerCompanyStaff(values, confirmPassword) {
-        return axios.post(` http://localhost:8080/api/auth/registerCompanyStaff?confirmPassword=${confirmPassword}`, values)
-    }
+const AuthService = {
+  login: (credentials) => axios.post(`${API_URL}/Account/login`, credentials),
+};
 
-    registerCandidate(values, confirmPassword) {
-        return axios.post(` http://localhost:8080/api/auth/registerCandidate?confirmPassword=${confirmPassword}`, values)
-    }
-
-    registerEmployer(values, confirmPassword) {
-        return axios.post(` http://localhost:8080/api/auth/registerEmployer?confirmPassword=${confirmPassword}`, values)
-    }
-
-}
+export default AuthService;

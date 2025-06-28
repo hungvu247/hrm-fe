@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useNavigate } from "react-router-dom"; // ✅ Thêm dòng này
 import DepartmentService from "../services/departmentService";
 import { Container, Grid, Label, Form, Button } from "semantic-ui-react";
 import Headline from "../layouts/Headline";
@@ -9,6 +10,7 @@ import MessageModal from "../layouts/MessageModal";
 export default function DepartmentAdd() {
   const [open, setOpen] = useState(false);
   const departmentService = new DepartmentService();
+  const navigate = useNavigate(); // ✅ Hook điều hướng
 
   const initialValues = {
     departmentName: "",
@@ -42,6 +44,13 @@ export default function DepartmentAdd() {
 
   const handleModal = (value) => {
     setOpen(value);
+  };
+
+  const handleModalClose = () => {
+    setOpen(false);
+    setTimeout(() => {
+      navigate("/department"); // ✅ Chuyển hướng sau khi đóng modal
+    }, 500);
   };
 
   const handleChange = (fieldName, value) => {
@@ -108,9 +117,19 @@ export default function DepartmentAdd() {
 
       <MessageModal
         open={open}
-        onClose={() => handleModal(false)}
         onOpen={() => handleModal(true)}
-        content="Department added successfully!"
+        onClose={handleModalClose} // ✅ Đóng và redirect
+        content="Department added successfully! Redirecting..."
+        header="Success"
+        size="small"
+        actions={[
+          {
+            key: "ok",
+            content: "OK",
+            positive: true,
+            onClick: handleModalClose,
+          },
+        ]}
       />
     </Container>
   );

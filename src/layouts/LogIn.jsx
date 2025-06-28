@@ -1,70 +1,36 @@
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
-import { Button, Grid, Header, Icon, Modal, Segment } from "semantic-ui-react";
+import React from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { Button, Image, Dropdown } from "semantic-ui-react";
 
 export default function LogIn() {
-  const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+  const token = localStorage.getItem("accessToken");
+  const userName = localStorage.getItem("user");
 
-  const handleModal = (value) => {
-    setOpen(value);
+  const handleAvatarClick = () => {
+    navigate("/user-detail");
   };
-  
-  return (
-    <span>
-      <Button
-        circular
-        color="pink"
-        content="Log-in"
-        onClick={() => handleModal(true)}
+
+  if (token) {
+    return (
+      <Dropdown
+        trigger={
+          <span>
+            <Image
+              avatar
+              src="/path/to/avatar.jpg"
+              onClick={handleAvatarClick}
+            />
+            <span style={{ marginLeft: "8px", color: "black" }}>
+              {userName}
+            </span>
+          </span>
+        }
       />
+    );
+  }
 
-      <Modal
-        basic
-        dimmer
-        onClose={() => handleModal(false)}
-        onOpen={() => handleModal(true)}
-        open={open}
-        size="small"
-      >
-        <Header icon as="h2" className="orbitron">
-          <Icon name="sign-in" />
-          What type of account do you want to log into ?
-        </Header>
-
-        <Modal.Actions>
-          <Grid>
-            <Grid.Row>
-              <Grid.Column width="7">
-                <Button
-                  circular
-                  fluid
-                  color="pink"
-                  content="Candidate"
-                  as={NavLink}
-                  to={"#"}
-                  onClick={() => setOpen(false)}
-                ></Button>
-              </Grid.Column>
-              <Grid.Column width="2">
-                <Segment basic className="or">
-                  or
-                </Segment>
-              </Grid.Column>
-              <Grid.Column width="7">
-                <Button
-                  circular
-                  fluid
-                  color="yellow"
-                  content="Employer"
-                  as={NavLink}
-                  to={"#"}
-                  onClick={() => setOpen(false)}
-                ></Button>
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
-        </Modal.Actions>
-      </Modal>
-    </span>
+  return (
+    <Button circular color="pink" content="Log-in" as={NavLink} to="/login" />
   );
 }

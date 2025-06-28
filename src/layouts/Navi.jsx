@@ -1,7 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import LogIn from "./LogIn";
-import SignUp from "./SignUp";
 import { Menu, Container, Header } from "semantic-ui-react";
 
 export default function Navi() {
@@ -19,40 +18,37 @@ export default function Navi() {
         </Menu.Item>
         <Menu.Item
           as={NavLink}
-          to="/home"
+          to="/dashboard/home"
           icon="circle notched"
           content="Home"
         />
         <Menu.Item
           as={NavLink}
-          to="/jobPostings"
+          to="/dashboard/departments"
           icon="list alternate outline"
-          content="Job Postings"
+          content="Department"
         />
         <Menu.Item
           as={NavLink}
-          to="/candidates"
+          to="/dashboard/candidates"
           icon="user outline"
           content="Candidates"
         />
         <Menu.Item
           as={NavLink}
-          to="/employers"
+          to="/dashboard/employers"
           icon="building outline"
           content="Employers"
         />
         <Menu.Item
           as={NavLink}
-          to="/aboutUs"
+          to="/dashboard/aboutUs"
           icon="heart outline"
           content="About Us"
         />
         <Menu.Menu position="right">
           <Menu.Item position="right">
             <LogIn />
-          </Menu.Item>
-          <Menu.Item position="right">
-            <SignUp />
           </Menu.Item>
         </Menu.Menu>
       </Container>
