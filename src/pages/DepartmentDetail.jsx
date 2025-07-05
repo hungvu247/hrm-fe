@@ -1,49 +1,148 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import axios from "axios";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
+import DepartmentService from "../services/departmentService";
 import {
+  Button,
+  Form,
+  Message,
   Container,
-  Header,
   Segment,
-  List,
+  Header,
+  Modal,
   Icon,
-  Divider,
 } from "semantic-ui-react";
 
-export default function DepartmentDetail() {
+export default function DepartmentUpdate() {
   const { id } = useParams();
-  const [department, setDepartment] = useState(null);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const [initialValues, setInitialValues] = useState({
+    departmentId: "",
+    departmentName: "",
+    description: "",
+  });
+
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [successModalOpen, setSuccessModalOpen] = useState(false);
 
   useEffect(() => {
-    axios.get(`https://localhost:7000/api/Department/${id}`).then((res) => {
-      setDepartment(res.data);
-    });
-  }, [id]);
+    const passedDept = location.state?.department;
+    const departmentService = new DepartmentService();
 
-  if (!department) return <p>Loading...</p>;
+    if (passedDept) {
+      setInitialValues({
+        departmentId: passedDept.departmentId,
+        departmentName: passedDept.departmentName,
+        description: passedDept.description,
+      });
+      setLoading(false);
+    } else {
+      departmentService
+        .getById(id)
+        .then((res) => {
+          const data = res.data;
+          setInitialValues({
+            departmentId: data.departmentId,
+            departmentName: data.departmentName,
+            description: data.description,
+          });
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.error("Lỗi khi gọi getById:", err);
+          setError("Không thể tải dữ liệu phòng ban.");
+          setLoading(false);
+        });
+    }
+  }, [id, location.state]);
+
+  const handleChange = (e, { name, value }) => {
+    setInitialValues((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleUpdate = () => {
+    const departmentService = new DepartmentService();
+
+    departmentService
+      .update(initialValues)
+      .then(() => {
+        setSuccessModalOpen(true);
+      })
+      .catch((err) => {
+        console.error("Update failed:", err);
+        setError("Không thể cập nhật phòng ban.");
+      });
+  };
+
+  const handleCancel = () => {
+    navigate("/dashboard/departments");
+  };
+
+  const handleSuccessModalClose = () => {
+    setSuccessModalOpen(false);
+    navigate("/dashboard/departments");
+  };
+
+  if (loading) return <p>Loading...</p>;
 
   return (
-    <Container className="content">
-      <Segment raised color="blue">
-        <Header as="h2" icon>
-          <Icon name="building" />
-          {department.DepartmentName}
-          <Header.Subheader>{department.Description}</Header.Subheader>
+    <Container style={{ paddingTop: "80px" }}>
+      <Segment raised>
+        <Header as="h2" color="blue" textAlign="center">
+          Update Department
         </Header>
-        <Divider />
-        <Header as="h3">Danh sách nhân viên</Header>
-        <List divided relaxed>
-          {department.Employees.map((emp) => (
-            <List.Item key={emp.EmployeeId}>
-              <Icon name="user circle" size="large" verticalAlign="middle" />
-              <List.Content>
-                <List.Header>{emp.FullName}</List.Header>
-                <List.Description>{emp.Position}</List.Description>
-              </List.Content>
-            </List.Item>
-          ))}
-        </List>
+
+        {error && (
+          <Message negative>
+            <Message.Header>Lỗi</Message.Header>
+            <p>{error}</p>
+          </Message>
+        )}
+
+        <Form>
+          <Form.Input
+            label="Department Name"
+            placeholder="Enter department name"
+            name="departmentName"
+            value={initialValues.departmentName}
+            onChange={handleChange}
+          />
+          <Form.TextArea
+            label="Description"
+            placeholder="Optional description..."
+            name="description"
+            value={initialValues.description}
+            onChange={handleChange}
+          />
+
+          <Button color="blue" onClick={handleUpdate}>
+            Update Department
+          </Button>
+          <Button onClick={handleCancel}>Cancel</Button>
+        </Form>
       </Segment>
+
+      {/* Modal thông báo thành công */}
+      <Modal
+        open={successModalOpen}
+        size="small"
+        onClose={handleSuccessModalClose}
+      >
+        <Header icon="check circle outline" content="Cập nhật thành công!" />
+        <Modal.Content>
+          <p>Phòng ban đã được cập nhật thành công.</p>
+        </Modal.Content>
+        <Modal.Actions>
+          <Button color="green" onClick={handleSuccessModalClose}>
+            <Icon name="checkmark" /> OK
+          </Button>
+        </Modal.Actions>
+      </Modal>
     </Container>
   );
 }

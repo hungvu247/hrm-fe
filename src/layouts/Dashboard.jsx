@@ -22,8 +22,12 @@ export default function Dashboard() {
         <Route path="department" element={<DepartmentLayout />} />
         <Route path="department/add" element={<DepartmentAdd />} />
         <Route path="departments" element={<DepartmentList />} />
-        <Route path="departments/:id" element={<DepartmentDetail />} />
         <Route path="department/edit/:id" element={<DepartmentUpdate />} />
+        <Route
+          path="department/detail/:id"
+          element={<DepartmentDetail />}
+        />{" "}
+        {/* ✅ Sửa dòng này */}
       </Routes>
 
       <Footer />
