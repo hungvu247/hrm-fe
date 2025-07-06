@@ -1,29 +1,35 @@
 import React from "react";
 import AuthService from "../../services/authService";
 import { useNavigate } from "react-router-dom";
+import { Message } from "semantic-ui-react";
 import "../../css/login.css";
 
 function LoginPage() {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [errorMessage, setErrorMessage] = React.useState("");
   const navigate = useNavigate();
 
   const onLogin = async () => {
+    setErrorMessage(""); // reset lỗi cũ
+
     if (!username || !password) {
-      alert("Please enter both username and password.");
+      setErrorMessage("Please enter both username and password.");
       return;
     }
 
     try {
       const credentials = { Username: username, Password: password };
       const response = await AuthService.login(credentials);
-      const { AccessToken, UserName } = response.data;
-      localStorage.setItem("accessToken", AccessToken);
-      localStorage.setItem("user", UserName);
+      const { accessToken, refreshToken, userName } = response.data;
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("refreshToken", refreshToken);
+      localStorage.setItem("user", userName);
+
       navigate("/dashboard");
     } catch (error) {
       console.error("Login failed", error);
-      alert("Login failed. Please check your username or password.");
+      setErrorMessage("Login failed. Please check your username or password.");
     }
   };
 
@@ -31,6 +37,14 @@ function LoginPage() {
     <div className="page-login">
       <div className="login-form-wrapper">
         <h2 className="login-form-title">Login to your account</h2>
+
+        {errorMessage && (
+          <Message negative>
+            <Message.Header>Login Error</Message.Header>
+            <p>{errorMessage}</p>
+          </Message>
+        )}
+
         <div className="input-group">
           <span className="input-group-text">
             <i className="fa fa-user" />

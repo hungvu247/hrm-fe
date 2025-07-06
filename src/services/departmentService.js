@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../utils/axiosInstance";
 
 export default class DepartmentService {
   getAuthHeaders() {
@@ -8,8 +8,15 @@ export default class DepartmentService {
     };
   }
 
-  getAll() {
-    return axios.get("https://localhost:7000/api/Department", {
+  getPaged({ search = "", skip = 0, top = 5, orderBy = "DepartmentName" }) {
+    const params = new URLSearchParams({
+      search,
+      skip,
+      top,
+      orderBy,
+    });
+
+    return axios.get(`https://localhost:7000/api/Department?${params}`, {
       headers: this.getAuthHeaders(),
     });
   }

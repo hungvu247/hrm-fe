@@ -30,22 +30,11 @@ export default function Navi() {
         />
         <Menu.Item
           as={NavLink}
-          to="/dashboard/candidates"
+          to="/dashboard/positions"
           icon="user outline"
-          content="Candidates"
+          content="Positions"
         />
-        <Menu.Item
-          as={NavLink}
-          to="/dashboard/employers"
-          icon="building outline"
-          content="Employers"
-        />
-        <Menu.Item
-          as={NavLink}
-          to="/dashboard/aboutUs"
-          icon="heart outline"
-          content="About Us"
-        />
+
         <Menu.Menu position="right">
           <Menu.Item position="right">
             <LogIn />
