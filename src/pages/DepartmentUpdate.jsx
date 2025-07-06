@@ -33,9 +33,9 @@ export default function DepartmentUpdate() {
         console.log("Department data:", dat);
         if (dat) {
           setInitialValues({
-            departmentId: dat.DepartmentId,
-            departmentName: dat.DepartmentName || "",
-            description: dat.Description || "",
+            departmentId: dat.departmentId,
+            departmentName: dat.departmentName || "",
+            description: dat.description || "",
           });
           setLoading(false);
         }
@@ -67,12 +67,12 @@ export default function DepartmentUpdate() {
   const handleModalClose = () => {
     setOpen(false);
     setTimeout(() => {
-      navigate("/department");
+      navigate("/dashboard/departments");
     }, 500);
   };
 
   const handleCancel = () => {
-    navigate("/department");
+    navigate("/dashboard/departments");
   };
 
   if (loading || !initialValues) {
@@ -82,8 +82,6 @@ export default function DepartmentUpdate() {
       </div>
     );
   }
-
-  console.log("initialValues:", initialValues);
 
   return (
     <Container className="content">

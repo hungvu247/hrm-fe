@@ -4,14 +4,16 @@ import {
   Card,
   Button,
   Grid,
-  Dropdown,
   Input,
   Pagination,
   Message,
   Table,
+  Modal,
+  Icon,
 } from "semantic-ui-react";
 import { useNavigate } from "react-router-dom";
-
+import axios from "axios";
+import Headline from "../layouts/Headline";
 export default function DepartmentList() {
   const [departments, setDepartments] = useState([]);
   const [view, setView] = useState("grid");
@@ -19,9 +21,24 @@ export default function DepartmentList() {
   const [page, setPage] = useState(1);
   const [totalCount, setTotalCount] = useState(0);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [selectedDept, setSelectedDept] = useState(null);
 
   const pageSize = 8;
   const navigate = useNavigate();
+  const departmentService = new DepartmentService();
+
+  // Tự động ẩn message sau 4s
+  useEffect(() => {
+    if (error || success) {
+      const timeout = setTimeout(() => {
+        setError("");
+        setSuccess("");
+      }, 4000);
+      return () => clearTimeout(timeout);
+    }
+  }, [error, success]);
 
   const loadDepartments = useCallback(() => {
     const token = localStorage.getItem("accessToken");
@@ -30,7 +47,6 @@ export default function DepartmentList() {
       return;
     }
 
-    const departmentService = new DepartmentService();
     const skip = (page - 1) * pageSize;
 
     departmentService
@@ -63,32 +79,55 @@ export default function DepartmentList() {
     loadDepartments();
   }, [loadDepartments]);
 
-  const goToAdd = () => {
-    navigate("/dashboard/department/add");
-  };
+  const goToAdd = () => navigate("/dashboard/department/add");
 
-  const goToEdit = (dept) => {
+  const goToEdit = (dept) =>
     navigate(`/dashboard/department/edit/${dept.departmentId}`, {
       state: { department: dept },
     });
-  };
 
-  const goToDetail = (id) => {
-    navigate(`/dashboard/department/detail/${id}`);
+  const goToDetail = (id) => navigate(`/dashboard/department/detail/${id}`);
+
+  const handleDeactivate = () => {
+    if (!selectedDept) return;
+
+    const token = localStorage.getItem("accessToken");
+
+    axios
+      .patch(
+        `https://localhost:7000/api/Department/${selectedDept.departmentId}`,
+        { status: "Inactive" },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then(() => {
+        setSuccess("✅ Phòng ban đã được dừng hoạt động thành công.");
+        setConfirmOpen(false);
+        setSelectedDept(null);
+        loadDepartments();
+      })
+      .catch((error) => {
+        console.error("Lỗi dừng hoạt động phòng ban:", error.response);
+        setError("Không thể dừng hoạt động phòng ban. Vui lòng thử lại.");
+        setConfirmOpen(false);
+      });
   };
 
   return (
     <div style={{ paddingTop: "80px", padding: "0 20px" }}>
+      <Headline content="Danh sách các phòng ban" />
       <Grid columns={3}>
         <Grid.Column width={4}>
-          <Dropdown
-            placeholder="Year"
-            selection
-            options={[
-              { key: 2023, value: 2023, text: "2023" },
-              { key: 2024, value: 2024, text: "2024" },
-              { key: 2025, value: 2025, text: "2025" },
-            ]}
+          <Button
+            content="Thêm Vị Trí"
+            color="green"
+            icon="plus"
+            floated="right"
+            onClick={goToAdd}
           />
         </Grid.Column>
         <Grid.Column width={8}>
@@ -120,14 +159,6 @@ export default function DepartmentList() {
               Grid View
             </Button>
           </Button.Group>
-          <Button
-            content="Thêm Department"
-            color="green"
-            icon="plus"
-            floated="right"
-            onClick={goToAdd}
-            style={{ marginTop: "10px" }}
-          />
         </Grid.Column>
       </Grid>
 
@@ -137,6 +168,12 @@ export default function DepartmentList() {
         <Message negative>
           <Message.Header>Lỗi</Message.Header>
           <p>{error}</p>
+        </Message>
+      )}
+      {success && (
+        <Message positive>
+          <Message.Header>Thành công</Message.Header>
+          <p>{success}</p>
         </Message>
       )}
 
@@ -177,7 +214,15 @@ export default function DepartmentList() {
                     onClick={(e) => e.stopPropagation()}
                   >
                     <Button icon="edit" onClick={() => goToEdit(dept)} />
-                    <Button icon="trash" color="red" size="tiny" />
+                    <Button
+                      icon="trash"
+                      color="red"
+                      size="tiny"
+                      onClick={() => {
+                        setSelectedDept(dept);
+                        setConfirmOpen(true);
+                      }}
+                    />
                   </div>
                 </Card.Content>
 
@@ -227,7 +272,15 @@ export default function DepartmentList() {
                       size="tiny"
                       onClick={() => goToEdit(dept)}
                     />
-                    <Button icon="trash" color="red" size="tiny" />
+                    <Button
+                      icon="trash"
+                      color="red"
+                      size="tiny"
+                      onClick={() => {
+                        setSelectedDept(dept);
+                        setConfirmOpen(true);
+                      }}
+                    />
                   </Table.Cell>
                 </Table.Row>
               );
@@ -244,6 +297,31 @@ export default function DepartmentList() {
           siblingRange={1}
         />
       </div>
+
+      <Modal
+        size="tiny"
+        open={confirmOpen}
+        onClose={() => setConfirmOpen(false)}
+      >
+        <Modal.Header>
+          <Icon name="exclamation triangle" color="red" />
+          Xác nhận dừng hoạt động
+        </Modal.Header>
+        <Modal.Content>
+          <p style={{ fontSize: "16px" }}>
+            Bạn có thực sự muốn dừng hoạt động phòng ban{" "}
+            <strong>{selectedDept?.departmentName}</strong> không?
+          </p>
+        </Modal.Content>
+        <Modal.Actions>
+          <Button color="grey" onClick={() => setConfirmOpen(false)}>
+            <Icon name="remove" /> Huỷ
+          </Button>
+          <Button color="red" onClick={handleDeactivate}>
+            <Icon name="checkmark" /> Xác nhận
+          </Button>
+        </Modal.Actions>
+      </Modal>
     </div>
   );
 }

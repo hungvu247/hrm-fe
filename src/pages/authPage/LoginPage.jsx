@@ -21,8 +21,9 @@ function LoginPage() {
     try {
       const credentials = { Username: username, Password: password };
       const response = await AuthService.login(credentials);
-      const { accessToken, userName } = response.data;
+      const { accessToken, refreshToken, userName } = response.data;
       localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("refreshToken", refreshToken);
       localStorage.setItem("user", userName);
 
       navigate("/dashboard");

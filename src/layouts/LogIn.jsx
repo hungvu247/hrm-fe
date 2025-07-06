@@ -7,6 +7,13 @@ export default function LogIn() {
   const token = localStorage.getItem("accessToken");
   const userName = localStorage.getItem("user");
 
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("user");
+    navigate("/login");
+  };
+
   const handleAvatarClick = () => {
     navigate("/user-detail");
   };
@@ -15,7 +22,7 @@ export default function LogIn() {
     return (
       <Dropdown
         trigger={
-          <span>
+          <span style={{ cursor: "pointer" }}>
             <Image
               avatar
               src="/path/to/avatar.jpg"
@@ -26,7 +33,14 @@ export default function LogIn() {
             </span>
           </span>
         }
-      />
+        pointing="top right"
+        icon={null}
+      >
+        <Dropdown.Menu>
+          <Dropdown.Item text="Thông tin cá nhân" onClick={handleAvatarClick} />
+          <Dropdown.Item text="Đăng xuất" onClick={handleLogout} />
+        </Dropdown.Menu>
+      </Dropdown>
     );
   }
 

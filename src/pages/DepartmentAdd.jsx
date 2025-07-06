@@ -49,7 +49,7 @@ export default function DepartmentAdd() {
   const handleModalClose = () => {
     setOpen(false);
     setTimeout(() => {
-      navigate("/department"); // ✅ Chuyển hướng sau khi đóng modal
+      navigate("/dashboard/departments"); // ✅ Chuyển hướng sau khi đóng modal
     }, 500);
   };
 

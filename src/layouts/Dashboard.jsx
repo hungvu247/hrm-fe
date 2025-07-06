@@ -13,6 +13,10 @@ import DepartmentUpdate from "../pages/DepartmentUpdate";
 import DepartmentList from "../pages/DepartmentList";
 import DepartmentLayout from "./DepartmentLayout";
 
+// Positions Pages
+import PositionLayout from "./PosistionLayout";
+import PositionAdd from "../pages/PositionAdd";
+import PositionUpdate from "../pages/PositionUpdate";
 export default function Dashboard() {
   return (
     <Container className="dashboard">
@@ -27,7 +31,9 @@ export default function Dashboard() {
           path="department/detail/:id"
           element={<DepartmentDetail />}
         />{" "}
-        {/* ✅ Sửa dòng này */}
+        <Route path="positions" element={<PositionLayout />}></Route>
+        <Route path="position/add" element={<PositionAdd />} />
+        <Route path="position/edit/:id" element={<PositionUpdate />}></Route>
       </Routes>
 
       <Footer />
