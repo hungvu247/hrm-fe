@@ -6,6 +6,7 @@ export default function LogIn() {
   const navigate = useNavigate();
   const token = localStorage.getItem("accessToken");
   const userName = localStorage.getItem("user");
+  const employeeId = localStorage.getItem("employeeId");
 
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
@@ -15,7 +16,7 @@ export default function LogIn() {
   };
 
   const handleAvatarClick = () => {
-    navigate("/user-detail");
+    navigate("employee/" + employeeId);
   };
 
   if (token) {
