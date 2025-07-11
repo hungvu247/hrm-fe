@@ -17,6 +17,9 @@ import DepartmentLayout from "./DepartmentLayout";
 import PositionLayout from "./PosistionLayout";
 import PositionAdd from "../pages/PositionAdd";
 import PositionUpdate from "../pages/PositionUpdate";
+
+//Employee Info Page
+import EmployeeInfo from "../pages/EmployeeInfo";
 export default function Dashboard() {
   return (
     <Container className="dashboard">
@@ -34,6 +37,8 @@ export default function Dashboard() {
         <Route path="positions" element={<PositionLayout />}></Route>
         <Route path="position/add" element={<PositionAdd />} />
         <Route path="position/edit/:id" element={<PositionUpdate />}></Route>
+        <Route path="home" element={<HomeLayout />} />
+        <Route path="employee/:id" element={<EmployeeInfo />}></Route>
       </Routes>
 
       <Footer />
