@@ -36,9 +36,9 @@ export default function Navi() {
         />
         <Menu.Item
           as={NavLink}
-          to="/dashboard/employers"
+          to="/dashboard/employees"
           icon="building outline"
-          content="Employers"
+          content="Employees"
         />
         <Menu.Item
           as={NavLink}
