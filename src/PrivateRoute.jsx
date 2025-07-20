@@ -36,6 +36,6 @@ export const PrivateRoute = ({ children }) => {
   const { token, loading } = useAuth();
   console.log("Giá trị token:", token);
   if (loading) return null;
-  if (!token) return <Navigate to="/login" replace />;
+  // if (!token) return <Navigate to="/login" replace />;
   return children;
 };
