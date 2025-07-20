@@ -207,9 +207,9 @@ export default function EmployeeAdd() {
                         name="departmentId"
 
                         options={departments.map((d) => ({
-                            key: d.DepartmentId,
-                            value: d.DepartmentId,
-                            text: d.DepartmentName,
+                            key: d.departmentId,
+                            value: d.departmentId,
+                            text: d.departmentName,
                         }))}
                         value={formik.values.departmentId}
                         onChange={(e, { value }) =>
@@ -226,9 +226,9 @@ export default function EmployeeAdd() {
                         label="Position"
                         name="positionId"
                         options={positions.map((p) => ({
-                            key: p.PositionId,
-                            value: p.PositionId,
-                            text: p.PositionName,
+                            key: p.positionId,
+                            value: p.positionId,
+                            text: p.positionName,
                         }))}
                         value={formik.values.positionId}
                         onChange={(e, { value }) =>
@@ -245,9 +245,9 @@ export default function EmployeeAdd() {
                         label="Role"
                         name="roleId"
                         options={roles.map((r) => ({
-                            key: r.RoleId,
-                            value: r.RoleId,
-                            text: r.RoleName,
+                            key: r.roleId,
+                            value: r.roleId,
+                            text: r.roleName,
                         }))}
                         value={formik.values.roleId}
                         onChange={(e, { value }) => formik.setFieldValue("roleId", value)}

@@ -62,20 +62,20 @@ export default function EmployeeEdit() {
                 const employee = res.data;
 
                 setInitialValues({
-                    firstName: employee.FirstName || "",
-                    lastName: employee.LastName || "",
-                    dateOfBirth: employee.DateOfBirth || "",
-                    phoneNumber: employee.PhoneNumber || "",
-                    address: employee.Address || "",
-                    hireDate: employee.HireDate || "",
-                    salary: employee.Salary || "",
-                    status: employee.Status || "",
-                    positionId: employee.PositionId || "",
-                    departmentId: employee.DepartmentId || "",
-                    username: employee.Username || "",  // nếu có
+                    firstName: employee.firstName || "",
+                    lastName: employee.lastName || "",
+                    dateOfBirth: employee.dateOfBirth || "",
+                    phoneNumber: employee.phoneNumber || "",
+                    address: employee.address || "",
+                    hireDate: employee.hireDate || "",
+                    salary: employee.salary || "",
+                    status: employee.status || "",
+                    positionId: employee.positionId || "",
+                    departmentId: employee.departmentId || "",
+                    username: employee.username || "",  // nếu có
                     password: "", // thường để rỗng khi edit
-                    email: employee.Email || "",
-                    roleId: employee.RoleId || "",
+                    email: employee.email || "",
+                    roleId: employee.roleId || "",
                 });
 
             } catch (error) {
@@ -226,9 +226,9 @@ export default function EmployeeEdit() {
                         label="Department"
                         name="departmentId"
                         options={departments.map((d) => ({
-                            key: d.DepartmentId,
-                            value: d.DepartmentId,
-                            text: d.DepartmentName,
+                            key: d.departmentId,
+                            value: d.departmentId,
+                            text: d.departmentName,
                         }))}
                         value={formik.values.departmentId}
                         onChange={(e, { value }) =>
@@ -244,9 +244,9 @@ export default function EmployeeEdit() {
                         label="Position"
                         name="positionId"
                         options={positions.map((p) => ({
-                            key: p.PositionId,
-                            value: p.PositionId,
-                            text: p.PositionName,
+                            key: p.positionId,
+                            value: p.positionId,
+                            text: p.positionName,
                         }))}
                         value={formik.values.positionId}
                         onChange={(e, { value }) =>
@@ -262,9 +262,9 @@ export default function EmployeeEdit() {
                         label="Role"
                         name="roleId"
                         options={roles.map((r) => ({
-                            key: r.RoleId,
-                            value: r.RoleId,
-                            text: r.RoleName,
+                            key: r.roleId,
+                            value: r.roleId,
+                            text: r.roleName,
                         }))}
                         value={formik.values.roleId}
                         onChange={(e, { value }) =>

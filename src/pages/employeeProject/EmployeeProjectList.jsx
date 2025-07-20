@@ -36,9 +36,9 @@ export default function EmployeeProjectList() {
             .then(res => {
                 console.log(res);
                 const options = res.data.map(e => ({
-                    key: `employee-${e.EmployeeId}`,
-                    text: `${e.Username}`,
-                    value: e.EmployeeId,
+                    key: `employee-${e.employeeId}`,
+                    text: `${e.username}`,
+                    value: e.employeeId,
                 }));
                 setEmployees(options);
             });
@@ -85,15 +85,15 @@ export default function EmployeeProjectList() {
 
     const goToEdit = (ep) => {
         // 🔑 Bên BE nên trả kèm EmployeeId & ProjectId để edit
-        navigate(`/dashboard/employee-projects/edit/${ep.EmployeeID}/${projectId}`);
+        navigate(`/dashboard/employee-projects/edit/${ep.employeeID}/${projectId}`);
     };
 
     const handleDelete = (ep) => {
-        if (window.confirm(`Bạn có chắc muốn xoá nhân viên ${ep.UserName} khỏi dự án không?`)) {
-            service.delete(ep.EmployeeID, id)
+        if (window.confirm(`Bạn có chắc muốn xoá nhân viên ${ep.userName} khỏi dự án không?`)) {
+            service.delete(ep.employeeID, id)
                 .then(() => {
                     setEmployeeProjects(employeeProjects.filter(item =>
-                        !(item.EmployeeID === ep.EmployeeID)
+                        !(item.employeeID === ep.employeeID)
                     ));
                 });
         }
@@ -160,11 +160,11 @@ export default function EmployeeProjectList() {
                 <Table.Body>
                     {employeeProjects.length > 0 ? (
                         employeeProjects.map((ep, index) => (
-                            <Table.Row key={`${ep.UserName}-${ep.ProjectName}-${index}`}>
+                            <Table.Row key={`${ep.userName}-${ep.projectName}-${index}`}>
                                 <Table.Cell>{(currentPage - 1) * pageSize + index + 1}</Table.Cell>
-                                <Table.Cell>{ep.UserName}</Table.Cell>
-                                <Table.Cell>{ep.ProjectName}</Table.Cell>
-                                <Table.Cell>{ep.RoleInProject || "-"}</Table.Cell>
+                                <Table.Cell>{ep.userName}</Table.Cell>
+                                <Table.Cell>{ep.projectName}</Table.Cell>
+                                <Table.Cell>{ep.roleInProject || "-"}</Table.Cell>
                                 <Table.Cell>
                                     <Button
                                         icon="edit"

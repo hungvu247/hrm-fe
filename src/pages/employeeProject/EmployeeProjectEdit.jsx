@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useFormik } from "formik";
+import React, {useEffect, useState} from "react";
+import {useFormik} from "formik";
 import * as Yup from "yup";
-import { useNavigate, useParams } from "react-router-dom";
-import { Button, Container, Form } from "semantic-ui-react";
+import {useNavigate, useParams} from "react-router-dom";
+import {Button, Container, Form} from "semantic-ui-react";
 import Headline from "../../layouts/Headline";
 import EmployeeProjectService from "../../services/employeeProjectService";
-import { toast } from "react-toastify";
 
 export default function EmployeeProjectEdit() {
     const { employeeId, projectId } = useParams();
@@ -21,10 +20,10 @@ export default function EmployeeProjectEdit() {
                 const data = res.data;
                 setInitialData(data);
                 formik.setValues({
-                    RoleInProject: data.RoleInProject || "",
+                    RoleInProject: data.roleInProject || "",
                 });
             })
-            .catch(() => toast.error("Failed to load employee-project data!"));
+            .catch(() => console.log("Lỗi"));
     }, [employeeId, projectId]);
 
     const validationSchema = Yup.object({
@@ -32,6 +31,7 @@ export default function EmployeeProjectEdit() {
     });
 
     const handleSubmit = (values) => {
+        console.log("check value" + values);
         const dto = {
             EmployeeId: employeeId,
             ProjectId: projectId,
@@ -39,10 +39,10 @@ export default function EmployeeProjectEdit() {
         };
         employeeProjectService.update(dto)
             .then(() => {
-                toast.success("Updated successfully!");
+
                 navigate(`/dashboard/employee-projects/${projectId}`);
             })
-            .catch(() => toast.error("Failed to update!"));
+            .catch(() => console.log("Lỗi"));
     };
 
     const formik = useFormik({
@@ -62,13 +62,13 @@ export default function EmployeeProjectEdit() {
             <Form onSubmit={formik.handleSubmit}>
                 <Form.Input
                     label="Employee"
-                    value={initialData.UserName}
+                    value={initialData.userName}
                     readOnly
                 />
 
                 <Form.Input
                     label="Project"
-                    value={initialData.ProjectName}
+                    value={initialData.projectName}
                     readOnly
                 />
 

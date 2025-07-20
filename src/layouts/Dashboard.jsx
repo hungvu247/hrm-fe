@@ -28,6 +28,7 @@ import PositionUpdate from "../pages/PositionUpdate";
 
 //Employee Info Page
 import EmployeeInfo from "../pages/EmployeeInfo";
+import EmployeeProjectEdit from "../pages/employeeProject/EmployeeProjectEdit";
 
 export default function Dashboard() {
     return (
@@ -60,7 +61,7 @@ export default function Dashboard() {
 
                 <Route path="employee-projects/:id" element={<EmployeeProjectList/>}/>
                 <Route path="employee-projects/add/:projectId" element={<EmployeeProjectAdd/>}/>
-                <Route path="/dashboard/employee-projects/edit/:employeeId/:projectId" element={<EmployeeProjectAdd/>}/>
+                <Route path="employee-projects/edit/:employeeId/:projectId" element={<EmployeeProjectEdit/>}/>
             </Routes>
 
 

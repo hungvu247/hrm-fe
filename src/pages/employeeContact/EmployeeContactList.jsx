@@ -38,9 +38,9 @@ export default function EmployeeContactList() {
         employeeService.getAll(1, 100, {}) // lấy tất cả nhân viên (hoặc limit lớn)
             .then(res => {
                 const options = res.data.data.map(e => ({
-                    key: e.EmployeeId,
-                    text: `${e.FirstName} ${e.LastName}`,
-                    value: e.EmployeeId
+                    key: e.employeeId,
+                    text: `${e.firstName} ${e.lastName}`,
+                    value: e.employeeId
                 }));
                 setEmployees(options);
             });
@@ -141,24 +141,24 @@ export default function EmployeeContactList() {
                     {contacts.map((c, index) => (
                         <Table.Row key={c.ContactId}>
                             <Table.Cell>{(currentPage - 1) * pageSize + index + 1}</Table.Cell>
-                            <Table.Cell>{c.EmployeeId}</Table.Cell>
-                            <Table.Cell>{c.ContactType}</Table.Cell>
-                            <Table.Cell>{c.ContactValue}</Table.Cell>
-                            <Table.Cell>{c.IsPrimary ? "✔️" : ""}</Table.Cell>
+                            <Table.Cell>{c.employeeId}</Table.Cell>
+                            <Table.Cell>{c.contactType}</Table.Cell>
+                            <Table.Cell>{c.contactValue}</Table.Cell>
+                            <Table.Cell>{c.isPrimary ? "✔️" : ""}</Table.Cell>
                             <Table.Cell>
                                 <Button
                                     icon="edit"
                                     basic
                                     size="tiny"
                                     onClick={() => {
-                                        goToEdit(c.ContactId)
+                                        goToEdit(c.contactId)
                                     }}
                                 />
                                 <Button
                                     icon="trash"
                                     color="red"
                                     size="tiny"
-                                    onClick={() => handleDelete(c.ContactId)}
+                                    onClick={() => handleDelete(c.contactId)}
                                 />
                             </Table.Cell>
                         </Table.Row>

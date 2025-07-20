@@ -55,9 +55,9 @@ export default function EmployeeContactAdd() {
                     label="Employee"
                     name="employeeId"
                     options={employees.map((e) => ({
-                        key: e.EmployeeId,
-                        value: e.EmployeeId,
-                        text: `${e.FirstName} ${e.LastName}`,
+                        key: e.employeeId,
+                        value: e.employeeId,
+                        text: `${e.firstName} ${e.lastName}`,
                     }))}
                     value={formik.values.employeeId}
                     onChange={(e, { value }) => formik.setFieldValue("employeeId", value)}

@@ -35,18 +35,18 @@ export default function EmployeeList() {
 
         departmentService.getAll2().then(res => {
             const options = res.data.map(dept => ({
-                key: dept.DepartmentId,
-                text: dept.DepartmentName,
-                value: dept.DepartmentId
+                key: dept.departmentId,
+                text: dept.departmentName,
+                value: dept.departmentId
             }));
             setDepartments(options);
         });
 
         positionService.getAll().then(res => {
             const options = res.data.map(pos => ({
-                key: pos.PositionId,
-                text: pos.PositionName,
-                value: pos.PositionId
+                key: pos.positionId,
+                text: pos.positionName,
+                value: pos.positionId
             }));
             setPositions(options);
         });
@@ -162,7 +162,7 @@ export default function EmployeeList() {
                                     icon="edit"
                                     basic
                                     size="tiny"
-                                    onClick={() => goToEdit(e.EmployeeId)}
+                                    onClick={() => goToEdit(e.employeeId)}
                                 />
                             </Table.Cell>
                         </Table.Row>
