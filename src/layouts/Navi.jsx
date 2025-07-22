@@ -32,9 +32,7 @@ export default function Navi() {
           as={NavLink}
           to="/dashboard/positions"
           icon="user outline"
-
           content="Positions"
-
         />
         <Menu.Item
           as={NavLink}
@@ -44,8 +42,8 @@ export default function Navi() {
         />
         <Menu.Item
           as={NavLink}
-          to="/dashboard/aboutUs"
-          icon="heart outline"
+          to="/dashboard/department/chart"
+          icon="chart bar"
           content="About Us"
         />
 

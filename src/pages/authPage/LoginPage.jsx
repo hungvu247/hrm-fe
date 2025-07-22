@@ -10,8 +10,15 @@ function LoginPage() {
   const [errorMessage, setErrorMessage] = React.useState("");
   const navigate = useNavigate();
 
+  React.useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      navigate("/dashboard");
+    }
+  }, [navigate]);
+
   const onLogin = async () => {
-    setErrorMessage(""); // reset lỗi cũ
+    setErrorMessage("");
 
     if (!username || !password) {
       setErrorMessage("Please enter both username and password.");
@@ -21,11 +28,21 @@ function LoginPage() {
     try {
       const credentials = { Username: username, Password: password };
       const response = await AuthService.login(credentials);
-      const { accessToken, refreshToken, userName, employeeId } = response.data;
+      const {
+        accessToken,
+        refreshToken,
+        userName,
+        employeeId,
+        positionId,
+        roleId,
+      } = response.data;
+      console.log("Login response:", response.data);
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshToken", refreshToken);
       localStorage.setItem("user", userName);
       localStorage.setItem("employeeId", employeeId);
+      localStorage.setItem("positionId", positionId); // 🔧 phải là "positionId"
+      localStorage.setItem("roleId", roleId);
 
       navigate("/dashboard");
     } catch (error) {
@@ -58,6 +75,7 @@ function LoginPage() {
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
+
         <div className="input-group">
           <span className="input-group-text">
             <i className="fa fa-lock" />
@@ -70,6 +88,7 @@ function LoginPage() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+
         <button className="btn-login" onClick={onLogin}>
           Login
         </button>
