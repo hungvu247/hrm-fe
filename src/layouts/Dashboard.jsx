@@ -31,6 +31,12 @@ import PositionUpdate from "../pages/PositionUpdate";
 import EmployeeInfo from "../pages/EmployeeInfo";
 import EmployeeProjectEdit from "../pages/employeeProject/EmployeeProjectEdit";
 import PromotionRequestForm from "../pages/promotionRequestForm";
+import ProjectList from "../pages/Project/ProjectList";
+import ProjectEdit from "../pages/Project/ProjectEdit";
+import ProjectAdd from "../pages/Project/ProjectAdd";
+import ProjectDetail from "../pages/Project/ProjectDetail";
+import DocumentAdd from "../pages/Document/DocumentAdd";
+import DocumentEdit from "../pages/Document/DocumentEdit";
 
 export default function Dashboard() {
   return (
@@ -72,6 +78,14 @@ export default function Dashboard() {
               element={<EmployeeProjectEdit />}
           />
           <Route path="promotion/request" element={<PromotionRequestForm />} />
+
+          <Route path="projects" element={<ProjectList/>} />
+          <Route path="projects/edit/:id" element={<ProjectEdit />} />
+          <Route path="projects/add" element={<ProjectAdd />} />
+          <Route path="projects/detail/:projectId" element={<ProjectDetail />} />
+
+          <Route path="document/add" element={<DocumentAdd />} />
+          <Route path="document/edit/:id" element={<DocumentEdit />} />
         </Routes>
 
         <Footer />
