@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c73be1de-7eb0-4b34-a711-a07fbb772521" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/layouts/Dashboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/Dashboard.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/EmployeeService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/EmployeeService.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -22,7 +21,7 @@
     </option>
   </component>
   <component name="Git.Merge.Settings">
-    <option name="BRANCH" value="origin/feature/project" />
+    <option name="BRANCH" value="origin/feature/show-employee-info" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
