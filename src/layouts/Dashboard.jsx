@@ -12,7 +12,6 @@ import DepartmentDetail from "../pages/DepartmentDetail";
 import DepartmentUpdate from "../pages/DepartmentUpdate";
 import DepartmentList from "../pages/DepartmentList";
 import DepartmentLayout from "./DepartmentLayout";
-import DepartmentChart from "../pages/DepartmentChart";
 import EmployeeList from "../pages/employee/EmployeeList";
 import EmployeeAdd from "../pages/employee/EmployeeAdd";
 import EmployeeEdit from "../pages/employee/EmployeeEdit";
@@ -30,7 +29,6 @@ import PositionUpdate from "../pages/PositionUpdate";
 //Employee Info Page
 import EmployeeInfo from "../pages/EmployeeInfo";
 import EmployeeProjectEdit from "../pages/employeeProject/EmployeeProjectEdit";
-import PromotionRequestForm from "../pages/PromotionRequestForm";
 
 export default function Dashboard() {
   return (
@@ -72,6 +70,15 @@ export default function Dashboard() {
           element={<EmployeeProjectEdit />}
         />
         <Route path="promotion/request" element={<PromotionRequestForm />} />
+
+          <Route path="projects" element={<ProjectList />} />
+          <Route path="projects/edit/:id" element={<ProjectEdit />} />
+          <Route path="projects/add" element={<ProjectAdd />} />
+          <Route path="projects/detail/:projectId" element={<ProjectDetail />} />
+
+          <Route path="document/add" element={<DocumentAdd />} />
+          <Route path="document/edit/:id" element={<DocumentEdit />} />
+
       </Routes>
 
       <Footer />
