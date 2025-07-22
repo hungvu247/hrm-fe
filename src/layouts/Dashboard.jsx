@@ -28,6 +28,57 @@ import PositionUpdate from "../pages/PositionUpdate";
 
 //Employee Info Page
 import EmployeeInfo from "../pages/EmployeeInfo";
+
+
+// Project Pages
+import ProjectList from "../pages/Project/ProjectList";
+import ProjectAdd from "../pages/Project/ProjectAdd";
+import ProjectEdit from "../pages/Project/ProjectEdit.jsx";
+import ProjectDetail from "../pages/Project/ProjectDetail";
+// Document Pages
+import DocumentAdd from "../pages/Document/DocumentAdd.jsx";
+import DocumentEdit from "../pages/Document/DocumentEdit.jsx";
+
+
+export default function Dashboard() {
+  return (
+    <Container className="dashboard">
+      <Navi />
+      <Routes>
+        <Route path="" element={<HomeLayout />} />
+        <Route path="department" element={<DepartmentLayout />} />
+        <Route path="department/add" element={<DepartmentAdd />} />
+        <Route path="departments" element={<DepartmentList />} />
+        <Route path="department/edit/:id" element={<DepartmentUpdate />} />
+        <Route
+          path="department/detail/:id"
+          element={<DepartmentDetail />}
+        />{" "}
+        <Route path="positions" element={<PositionLayout />}></Route>
+        <Route path="position/add" element={<PositionAdd />} />
+        <Route path="position/edit/:id" element={<PositionUpdate />}></Route>
+        <Route path="home" element={<HomeLayout />} />
+        <Route path="employee/:id" element={<EmployeeInfo />}></Route>
+
+        <Route path="projects" element={<ProjectList />} />
+        <Route path="projects/edit/:id" element={<ProjectEdit />} />
+        <Route path="projects/add" element={<ProjectAdd />} />
+        <Route path="projects/detail/:projectId" element={<ProjectDetail />} />
+
+        <Route path="document/add" element={<DocumentAdd />} />
+        <Route path="document/edit/:id" element={<DocumentEdit />} />
+
+        
+        
+
+
+        
+      </Routes>
+
+      <Footer />
+    </Container>
+  );
+=======
 import EmployeeProjectEdit from "../pages/employeeProject/EmployeeProjectEdit";
 
 export default function Dashboard() {
@@ -68,4 +119,5 @@ export default function Dashboard() {
             <Footer/>
         </Container>
     );
+
 }
