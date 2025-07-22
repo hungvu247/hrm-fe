@@ -32,9 +32,7 @@ export default function Navi() {
           as={NavLink}
           to="/dashboard/positions"
           icon="user outline"
-
           content="Positions"
-
         />
         <Menu.Item
           as={NavLink}
