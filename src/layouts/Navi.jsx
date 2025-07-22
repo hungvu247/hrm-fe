@@ -44,8 +44,8 @@ export default function Navi() {
         />
         <Menu.Item
           as={NavLink}
-          to="/dashboard/aboutUs"
-          icon="heart outline"
+          to="/dashboard/department/chart"
+          icon="chart bar"
           content="About Us"
         />
 

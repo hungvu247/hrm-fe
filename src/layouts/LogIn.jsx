@@ -39,6 +39,12 @@ export default function LogIn() {
       >
         <Dropdown.Menu>
           <Dropdown.Item text="Thông tin cá nhân" onClick={handleAvatarClick} />
+
+          <Dropdown.Item
+            as={NavLink}
+            to="/dashboard/promotion/request"
+            text="Yêu cầu thăng chức"
+          />
           <Dropdown.Item text="Đăng xuất" onClick={handleLogout} />
         </Dropdown.Menu>
       </Dropdown>
