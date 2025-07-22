@@ -20,7 +20,11 @@ export default class DepartmentService {
       headers: this.getAuthHeaders(),
     });
   }
-
+  getAll2() {
+    return axios.get("https://localhost:7000/api/Department/get-all-department", {
+      headers: this.getAuthHeaders(),
+    });
+  }
   getById(id) {
     return axios.get(`https://localhost:7000/api/Department/${id}`, {
       headers: this.getAuthHeaders(),
