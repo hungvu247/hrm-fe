@@ -29,6 +29,7 @@ const PromotionRequestForm = () => {
       ...prev,
       requestedBy: employeeId,
       employeeId: employeeId,
+      approverId: 2,
       currentPositionId: currentPositionId, // Gán currentPositionId từ localStorage
     }));
 
@@ -157,14 +158,15 @@ const PromotionRequestForm = () => {
       </div>
 
       <div style={fieldStyle}>
-        <label style={labelStyle}>Assign to (Approver ID):</label>
+        <label style={labelStyle}>Assign to:</label>
         <input
           name="assignedTo"
-          value={formData.assignedTo}
+          value={"Trưởng phòng Nhân sự"}
           onChange={handleChange}
           placeholder="Approver ID"
           required
           style={inputStyle}
+          disabled
         />
       </div>
 
