@@ -60,7 +60,6 @@ export default function EmployeeAdd() {
         positionId: "",
         departmentId: "",
         username: "",
-        password: "",
         email: "",
         roleId: "",
     };
@@ -75,7 +74,6 @@ export default function EmployeeAdd() {
         salary: Yup.number().required("Salary is required"),
         status: Yup.string().required("Status is required"),
         username: Yup.string().required("Username is required"),
-        password: Yup.string().required("Password is required"),
         email: Yup.string().required("Email is required"),
     });
 
@@ -268,18 +266,6 @@ export default function EmployeeAdd() {
                         error={
                             formik.touched.username && formik.errors.username
                                 ? { content: formik.errors.username }
-                                : null
-                        }
-                    />
-                    <Form.Input
-                        label="Password"
-                        type="password"
-                        name="password"
-                        value={formik.values.password}
-                        onChange={formik.handleChange}
-                        error={
-                            formik.touched.password && formik.errors.password
-                                ? { content: formik.errors.password }
                                 : null
                         }
                     />
