@@ -12,6 +12,7 @@ import DepartmentDetail from "../pages/DepartmentDetail";
 import DepartmentUpdate from "../pages/DepartmentUpdate";
 import DepartmentList from "../pages/DepartmentList";
 import DepartmentLayout from "./DepartmentLayout";
+import DepartmentChart from "../pages/DepartmentChart";
 import EmployeeList from "../pages/employee/EmployeeList";
 import EmployeeAdd from "../pages/employee/EmployeeAdd";
 import EmployeeEdit from "../pages/employee/EmployeeEdit";
@@ -29,59 +30,51 @@ import PositionUpdate from "../pages/PositionUpdate";
 //Employee Info Page
 import EmployeeInfo from "../pages/EmployeeInfo";
 import EmployeeProjectEdit from "../pages/employeeProject/EmployeeProjectEdit";
+import PromotionRequestForm from "../pages/promotionRequestForm";
 
 export default function Dashboard() {
   return (
-    <Container className="dashboard">
-      <Navi />
+      <Container className="dashboard">
+        <Navi />
 
-      <Routes>
-        <Route path="" element={<HomeLayout />} />
-        <Route path="department" element={<DepartmentLayout />} />
-        <Route path="department/add" element={<DepartmentAdd />} />
-        <Route path="departments" element={<DepartmentList />} />
-        <Route path="department/edit/:id" element={<DepartmentUpdate />} />
-        <Route
-          path="department/detail/:id"
-          element={<DepartmentDetail />}
-        />{" "}
-        <Route path="department/chart" element={<DepartmentChart />}></Route>
-        <Route path="positions" element={<PositionLayout />}></Route>
-        <Route path="position/add" element={<PositionAdd />} />
-        <Route path="position/edit/:id" element={<PositionUpdate />}></Route>
-        <Route path="home" element={<HomeLayout />} />
-        <Route path="employee/:id" element={<EmployeeInfo />}></Route>
-        <Route path="employees" element={<EmployeeList />} />
-        <Route path="employees/add" element={<EmployeeAdd />} />
-        <Route path="employees/edit/:id" element={<EmployeeEdit />} />
-        <Route path="employee-contacts" element={<EmployeeContactList />} />
-        <Route path="employee-contacts/add" element={<EmployeeContactAdd />} />
-        <Route
-          path="employee-contacts/edit/:id"
-          element={<EmployeeContactEdit />}
-        />
-        <Route path="employee-projects/:id" element={<EmployeeProjectList />} />
-        <Route
-          path="employee-projects/add/:projectId"
-          element={<EmployeeProjectAdd />}
-        />
-        <Route
-          path="employee-projects/edit/:employeeId/:projectId"
-          element={<EmployeeProjectEdit />}
-        />
-        <Route path="promotion/request" element={<PromotionRequestForm />} />
+        <Routes>
+          <Route path="" element={<HomeLayout />} />
+          <Route path="department" element={<DepartmentLayout />} />
+          <Route path="department/add" element={<DepartmentAdd />} />
+          <Route path="departments" element={<DepartmentList />} />
+          <Route path="department/edit/:id" element={<DepartmentUpdate />} />
+          <Route
+              path="department/detail/:id"
+              element={<DepartmentDetail />}
+          />{" "}
+          <Route path="department/chart" element={<DepartmentChart />}></Route>
+          <Route path="positions" element={<PositionLayout />}></Route>
+          <Route path="position/add" element={<PositionAdd />} />
+          <Route path="position/edit/:id" element={<PositionUpdate />}></Route>
+          <Route path="home" element={<HomeLayout />} />
+          <Route path="employee/:id" element={<EmployeeInfo />}></Route>
+          <Route path="employees" element={<EmployeeList />} />
+          <Route path="employees/add" element={<EmployeeAdd />} />
+          <Route path="employees/edit/:id" element={<EmployeeEdit />} />
+          <Route path="employee-contacts" element={<EmployeeContactList />} />
+          <Route path="employee-contacts/add" element={<EmployeeContactAdd />} />
+          <Route
+              path="employee-contacts/edit/:id"
+              element={<EmployeeContactEdit />}
+          />
+          <Route path="employee-projects/:id" element={<EmployeeProjectList />} />
+          <Route
+              path="employee-projects/add/:projectId"
+              element={<EmployeeProjectAdd />}
+          />
+          <Route
+              path="employee-projects/edit/:employeeId/:projectId"
+              element={<EmployeeProjectEdit />}
+          />
+          <Route path="promotion/request" element={<PromotionRequestForm />} />
+        </Routes>
 
-          <Route path="projects" element={<ProjectList />} />
-          <Route path="projects/edit/:id" element={<ProjectEdit />} />
-          <Route path="projects/add" element={<ProjectAdd />} />
-          <Route path="projects/detail/:projectId" element={<ProjectDetail />} />
-
-          <Route path="document/add" element={<DocumentAdd />} />
-          <Route path="document/edit/:id" element={<DocumentEdit />} />
-
-      </Routes>
-
-      <Footer />
-    </Container>
+        <Footer />
+      </Container>
   );
 }
