@@ -111,6 +111,14 @@ export default function ProjectList() {
                   </Button>
                   <Button
                     size="small"
+                    color="teal"
+                    as={Link}
+                    to={`/dashboard/employee-projects/${project.projectId}`}
+                  >
+                    Nhân viên
+                  </Button>
+                  <Button
+                    size="small"
                     color="red"
                     onClick={() => handleDelete(project.projectId)}
                   >
@@ -123,19 +131,36 @@ export default function ProjectList() {
         </Table.Body>
       </Table>
 
-      {/* Phân trang */}
-      <div style={{ marginTop: "1rem" }}>
-        <Button disabled={page <= 1} onClick={() => setPage(page - 1)}>
-          Trang trước
-        </Button>
-        <span style={{ padding: "0 1rem" }}>Trang {page}</span>
+      {/* Phân trang mới */}
+    <div style={{ marginTop: "2rem", textAlign: "center" }}>
+    <Button.Group>
         <Button
-          disabled={projects.length < pageSize}
-          onClick={() => setPage(page + 1)}
-        >
-          Trang sau
+        icon="angle double left"
+        disabled={page === 1}
+        onClick={() => setPage(1)}
+        />
+        <Button
+        icon="angle left"
+        disabled={page === 1}
+        onClick={() => setPage(page - 1)}
+        />
+        <Button disabled>
+        {page}
         </Button>
-      </div>
+        <Button
+        icon="angle right"
+        disabled={projects.length < pageSize}
+        onClick={() => setPage(page + 1)}
+        />
+        <Button
+        icon="angle double right"
+        disabled={projects.length < pageSize}
+        onClick={() => setPage((prev) => prev + 1)} // hoặc gọi API để lấy totalPages nếu có
+        />
+    </Button.Group>
+    </div>
+
+      
     </div>
   );
 }

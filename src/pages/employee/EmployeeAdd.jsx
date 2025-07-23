@@ -7,7 +7,7 @@ import Headline from "../../layouts/Headline";
 import RoleService from "../../services/roleService";
 import PositionService from "../../services/positionService";
 import DepartmentService from "../../services/departmentService";
-import EmployeeService from "../../services/EmployeeService";
+import EmployeeService from "../../services/employeeService";
 export default function EmployeeAdd() {
   const [departments, setDepartments] = useState([]);
   const [positions, setPositions] = useState([]);

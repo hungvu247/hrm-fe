@@ -9,7 +9,7 @@ import {
   ListGroup,
 } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
-import EmployeeService from "../services/EmployeeService";
+import EmployeeService from "../services/employeeService";
 
 export default function EmployeeInfo() {
   const { id } = useParams();

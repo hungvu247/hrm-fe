@@ -4,7 +4,7 @@ import { Table, Button, Message, Icon } from "semantic-ui-react";
 import ProjectService from "../../services/ProjectService";
 import DocumentService from "../../services/documentService";
 import ReviewService from "../../services/reviewService";
-import EmployeeService from "../../services/EmployeeService";
+import EmployeeService from "../../services/employeeService";
 
 export default function ProjectDetail() {
   const { projectId } = useParams();

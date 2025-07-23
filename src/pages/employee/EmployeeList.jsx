@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Button, Grid, Input, Table, Dropdown } from "semantic-ui-react";
 
 import PaginationControl from "../../layouts/Util/PaginationControl";
-import EmployeeService from "../../services/EmployeeService";
+import EmployeeService from "../../services/employeeService";
 import PositionService from "../../services/positionService";
 import DepartmentService from "../../services/departmentService";
 
