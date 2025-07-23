@@ -37,9 +37,11 @@ import ProjectAdd from "../pages/Project/ProjectAdd";
 import ProjectDetail from "../pages/Project/ProjectDetail";
 import DocumentAdd from "../pages/Document/DocumentAdd";
 import DocumentEdit from "../pages/Document/DocumentEdit";
+
 import DashboardChart from "../pages/DashboardChart";
 import Forbidden403 from "../pages/403";
 import PerformanceStatsByProject from "../pages/PerformanceStatsByProject";
+
 export default function Dashboard() {
   return (
     <Container className="dashboard">
@@ -87,6 +89,7 @@ export default function Dashboard() {
         <Route path="document/add" element={<DocumentAdd />} />
         <Route path="document/edit/:id" element={<DocumentEdit />} />
         <Route path="forbidden" element={<Forbidden403 />} />
+
         <Route path="chart" element={<DashboardChart />}></Route>
         <Route
           path="/dashboard/project-statistics/:projectId"
