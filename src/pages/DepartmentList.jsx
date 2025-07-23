@@ -70,7 +70,17 @@ export default function DepartmentList() {
         setError("");
       })
       .catch((err) => {
-        setError("Không thể tải dữ liệu phòng ban.");
+        if (err.response?.status === 403) {
+          setError("🚫 Bạn không có quyền truy cập danh sách phòng ban.");
+          navigate("/dashboard/forbidden");
+        } else if (err.response?.status === 401) {
+          setError("⚠️ Phiên đăng nhập đã hết. Vui lòng đăng nhập lại.");
+          // navigate("/login");
+        } else {
+          setError("Không thể tải dữ liệu phòng ban. Vui lòng thử lại sau.");
+          navigate("/dashboard/forbidden");
+        }
+
         console.error("Lỗi API:", err);
       });
   }, [search, page]);

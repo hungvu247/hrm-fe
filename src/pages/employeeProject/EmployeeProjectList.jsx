@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button, Dropdown, Grid, Input, Table } from "semantic-ui-react";
 import EmployeeProjectService from "../../services/employeeProjectService";
-import EmployeeService from "../../services/EmployeeService";
+import EmployeeService from "../../services/employeeService";
 import PaginationControl from "../../layouts/Util/PaginationControl";
 import { useNavigate, useParams } from "react-router-dom";
 

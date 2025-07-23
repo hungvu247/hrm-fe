@@ -4,7 +4,7 @@ import { Table, Button, Message, Icon } from "semantic-ui-react";
 import ProjectService from "../../services/ProjectService";
 import DocumentService from "../../services/documentService";
 import ReviewService from "../../services/reviewService";
-import EmployeeService from "../../services/EmployeeService";
+import EmployeeService from "../../services/employeeService";
 
 export default function ProjectDetail() {
   const { projectId } = useParams();
@@ -33,14 +33,17 @@ export default function ProjectDetail() {
         setReviews(reviewRes.data);
 
         // Lấy tên nhân viên từ API
-        const employeeIds = [...new Set(reviewRes.data.map((r) => r.employeeId))];
+        const employeeIds = [
+          ...new Set(reviewRes.data.map((r) => r.employeeId)),
+        ];
         const map = {};
 
         await Promise.all(
           employeeIds.map(async (id) => {
             try {
               const res = await employeeService.getById(id);
-              map[id] = res.data.fullName || res.data.name || `Nhân viên #${id}`;
+              map[id] =
+                res.data.fullName || res.data.name || `Nhân viên #${id}`;
             } catch {
               map[id] = `Nhân viên #${id}`;
             }
@@ -84,7 +87,13 @@ export default function ProjectDetail() {
         Chi tiết Dự án: <span style={{ color: "teal" }}>{projectName}</span>
       </h2>
 
-      <div style={{ marginBottom: "1rem", display: "flex", justifyContent: "space-between" }}>
+      <div
+        style={{
+          marginBottom: "1rem",
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
         <Button as={Link} to="/dashboard/projects" color="grey" size="small">
           ← Quay lại danh sách
         </Button>
@@ -114,16 +123,34 @@ export default function ProjectDetail() {
               <Table.Row key={doc.documentId}>
                 <Table.Cell>{doc.documentName}</Table.Cell>
                 <Table.Cell>
-                  <a href={doc.filePath} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={doc.filePath}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     {doc.filePath}
                   </a>
                 </Table.Cell>
-                <Table.Cell>{new Date(doc.uploadDate).toLocaleDateString("vi-VN")}</Table.Cell>
+                <Table.Cell>
+                  {new Date(doc.uploadDate).toLocaleDateString("vi-VN")}
+                </Table.Cell>
                 <Table.Cell textAlign="center">
-                  <Button icon size="mini" color="blue" title="Sửa" onClick={() => handleEdit(doc.documentId)}>
+                  <Button
+                    icon
+                    size="mini"
+                    color="blue"
+                    title="Sửa"
+                    onClick={() => handleEdit(doc.documentId)}
+                  >
                     <Icon name="edit" />
                   </Button>
-                  <Button icon size="mini" color="red" title="Xóa" onClick={() => handleDelete(doc.documentId)}>
+                  <Button
+                    icon
+                    size="mini"
+                    color="red"
+                    title="Xóa"
+                    onClick={() => handleDelete(doc.documentId)}
+                  >
                     <Icon name="trash" />
                   </Button>
                 </Table.Cell>
@@ -136,7 +163,10 @@ export default function ProjectDetail() {
       {/* Danh sách Đánh giá */}
       <h3 style={{ marginTop: "2rem" }}>Đánh giá</h3>
       {reviews.length === 0 ? (
-        <Message warning content="Chưa có đánh giá hiệu suất nào cho dự án này." />
+        <Message
+          warning
+          content="Chưa có đánh giá hiệu suất nào cho dự án này."
+        />
       ) : (
         <Table celled striped>
           <Table.Header>
@@ -150,8 +180,12 @@ export default function ProjectDetail() {
           <Table.Body>
             {reviews.map((r) => (
               <Table.Row key={r.reviewId}>
-                <Table.Cell>{employeeMap[r.employeeId] || `Nhân viên #${r.employeeId}`}</Table.Cell>
-                <Table.Cell>{new Date(r.reviewDate).toLocaleDateString("vi-VN")}</Table.Cell>
+                <Table.Cell>
+                  {employeeMap[r.employeeId] || `Nhân viên #${r.employeeId}`}
+                </Table.Cell>
+                <Table.Cell>
+                  {new Date(r.reviewDate).toLocaleDateString("vi-VN")}
+                </Table.Cell>
                 <Table.Cell>{r.comments}</Table.Cell>
                 <Table.Cell>
                   {[...Array(5)].map((_, i) => (

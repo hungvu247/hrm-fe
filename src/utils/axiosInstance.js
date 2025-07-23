@@ -39,13 +39,12 @@ axiosInstance.interceptors.response.use(
         const newAccessToken = res.data.accessToken;
         localStorage.setItem("accessToken", newAccessToken);
 
-        // Gắn lại token mới và gọi lại request cũ
         originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
         return axiosInstance(originalRequest);
       } catch (refreshError) {
         console.error("Refresh token failed", refreshError);
         localStorage.clear();
-        window.location.href = "/login"; // hoặc navigate("/login") nếu dùng hook
+        window.location.href = "/login";
         return Promise.reject(refreshError);
       }
     }
