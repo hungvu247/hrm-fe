@@ -121,6 +121,14 @@ export default function ProjectList() {
                     Chi tiết
                   </Button>
                   <Button
+                      size="small"
+                      color="teal"
+                      as={Link}
+                      to={`/dashboard/employee-projects/${project.projectId}`}
+                  >
+                    Nhân viên
+                  </Button>
+                  <Button
                     size="small"
                     color="red"
                     onClick={() => handleDelete(project.projectId)}
