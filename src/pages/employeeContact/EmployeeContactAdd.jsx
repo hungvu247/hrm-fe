@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { Button, Container, Form, Checkbox } from "semantic-ui-react";
 import Headline from "../../layouts/Headline";
-import EmployeeService from "../../services/EmployeeService";
+import EmployeeService from "../../services/employeeService";
 import EmployeeContactService from "../../services/employeeContactService"; // bạn cần tạo service này
 
 export default function EmployeeContactAdd() {

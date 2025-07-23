@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Input, Table } from "semantic-ui-react";
 import ProjectService from "../../services/ProjectService";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function ProjectList() {
   const projectService = new ProjectService();
@@ -10,6 +10,7 @@ export default function ProjectList() {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const pageSize = 10;
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchProjects();
@@ -33,6 +34,10 @@ export default function ProjectList() {
     setSearch(e.target.value);
     setPage(1);
   };
+  const handleNavigateChart = (projectId) => {
+    console.log("Navigating to project statistics for projectId:", projectId);
+    navigate(`/dashboard/project-statistics/${projectId}`);
+  };
 
   const handleDelete = async (id) => {
     const confirm = window.confirm("Bạn có chắc chắn muốn xóa dự án này?");
@@ -49,11 +54,17 @@ export default function ProjectList() {
 
   return (
     <div>
-        <br></br>
+      <br></br>
       <h2>Danh sách Project</h2>
 
       {/* Nút Thêm mới */}
-      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "1rem" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          marginBottom: "1rem",
+        }}
+      >
         <Input
           icon="search"
           placeholder="Tìm kiếm project..."
@@ -115,6 +126,14 @@ export default function ProjectList() {
                     onClick={() => handleDelete(project.projectId)}
                   >
                     Xóa
+                  </Button>
+                  <Button
+                    size="small"
+                    color="error"
+                    style={{ marginTop: "10px" }}
+                    onClick={() => handleNavigateChart(project.projectId)} // Gọi hàm khi bấm nút
+                  >
+                    Thống kê
                   </Button>
                 </Table.Cell>
               </Table.Row>

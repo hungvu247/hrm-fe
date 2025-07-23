@@ -22,7 +22,6 @@ ChartJS.register(
 
 const DepartmentChart = () => {
   const [chartData, setChartData] = useState(null);
-
   useEffect(() => {
     axios
       .get("https://localhost:7000/api/Statistics/employee-by-department")
@@ -54,7 +53,7 @@ const DepartmentChart = () => {
       })
       .catch((err) => console.error("Lỗi khi gọi API:", err));
   }, []);
-
+  console.log("Chart data:", chartData);
   const options = {
     responsive: true,
     plugins: {

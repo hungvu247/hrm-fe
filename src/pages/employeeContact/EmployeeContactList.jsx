@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button, Dropdown, Grid, Input, Table } from "semantic-ui-react";
 import EmployeeContactService from "../../services/employeeContactService";
-import EmployeeService from "../../services/EmployeeService";
+import EmployeeService from "../../services/employeeService";
 import PaginationControl from "../../layouts/Util/PaginationControl";
 import { useNavigate } from "react-router-dom";
 
@@ -54,7 +54,17 @@ export default function EmployeeContactList() {
         setContacts(res.data.data);
         setTotalPages(res.data.totalPages);
       })
-      .catch((err) => console.error("Lỗi khi lấy liên hệ:", err));
+      .catch((err) => {
+        if (err.response?.status === 403) {
+          navigate("/dashboard/forbidden");
+        } else if (err.response?.status === 401) {
+          navigate("/login");
+        } else {
+          navigate("/dashboard/forbidden");
+        }
+
+        console.error("Lỗi API:", err);
+      });
   }, [search, employeeId, type, currentPage, pageSize]);
 
   const handleDelete = (id) => {

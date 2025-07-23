@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import { Button, Container, Form } from "semantic-ui-react";
 
 import Headline from "../../layouts/Headline";
-import EmployeeService from "../../services/EmployeeService";
+import EmployeeService from "../../services/employeeService";
 import DepartmentService from "../../services/departmentService";
 import PositionService from "../../services/positionService";
 import RoleService from "../../services/roleService";

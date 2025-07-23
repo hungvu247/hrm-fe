@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Button, Grid, Input, Table, Dropdown } from "semantic-ui-react";
 
 import PaginationControl from "../../layouts/Util/PaginationControl";
-import EmployeeService from "../../services/EmployeeService";
+import EmployeeService from "../../services/employeeService";
 import PositionService from "../../services/positionService";
 import DepartmentService from "../../services/departmentService";
 
@@ -62,7 +62,15 @@ export default function EmployeeList() {
         setTotalPages(res.data.totalPages);
       })
       .catch((err) => {
-        console.error("Lỗi khi lấy danh sách nhân viên:", err);
+        if (err.response?.status === 403) {
+          navigate("/dashboard/forbidden");
+        } else if (err.response?.status === 401) {
+          navigate("/login");
+        } else {
+          navigate("/dashboard/forbidden");
+        }
+
+        console.error("Lỗi API:", err);
       });
   }, [search, departmentId, positionId, currentPage, pageSize]);
 
