@@ -52,6 +52,12 @@ export default function Navi() {
           icon="user project"
           content="Projects"
         />
+        <Menu.Item
+          as={NavLink}
+          to="/dashboard/request"
+          icon="mail"
+          content="Application "
+        />
         <Menu.Menu position="right">
           <Menu.Item position="right">
             <LogIn />
