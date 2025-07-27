@@ -21,16 +21,26 @@ export default class DepartmentService {
     });
   }
   getAll2() {
-    return axios.get("https://localhost:7000/api/Department/get-all-department", {
-      headers: this.getAuthHeaders(),
-    });
+    return axios.get(
+      "https://localhost:7000/api/Department/get-all-department",
+      {
+        headers: this.getAuthHeaders(),
+      }
+    );
   }
   getById(id) {
     return axios.get(`https://localhost:7000/api/Department/${id}`, {
       headers: this.getAuthHeaders(),
     });
   }
-
+  getEmployeesByDeparmentId(id) {
+    return axios.get(
+      ` https://localhost:7000/api/Department/employee-department/${id}`,
+      {
+        headers: this.getAuthHeaders(),
+      }
+    );
+  }
   add(values) {
     return axios.post("https://localhost:7000/api/Department", values, {
       headers: {

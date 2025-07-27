@@ -210,8 +210,8 @@ export default function DepartmentList() {
                     className="ui circular image"
                     style={{ width: 80, marginBottom: 10 }}
                   />
-                  <Card.Header>{lead?.fullName || "No Lead"}</Card.Header>
-                  <Card.Meta>{dept.departmentName}</Card.Meta>
+                  <Card.Header>{dept.departmentName}</Card.Header>
+                  <Card.Meta>{lead?.fullName || "No Lead"}</Card.Meta>
                 </Card.Content>
 
                 <Card.Content extra>
@@ -262,9 +262,6 @@ export default function DepartmentList() {
 
           <Table.Body>
             {departments.map((dept, index) => {
-              const lead = dept.employees?.find((e) =>
-                e.position?.toLowerCase().includes("trưởng")
-              );
               return (
                 <Table.Row
                   key={dept.departmentId}
@@ -272,8 +269,13 @@ export default function DepartmentList() {
                   style={{ cursor: "pointer" }}
                 >
                   <Table.Cell>{(page - 1) * pageSize + index + 1}</Table.Cell>
+                  <Table.Cell>
+                    <strong style={{ color: "#007bff", fontSize: "1.1em" }}>
+                      {" "}
+                      {dept.leadEmployee.fullName || "No Lead"}
+                    </strong>
+                  </Table.Cell>
                   <Table.Cell>{dept.departmentName}</Table.Cell>
-                  <Table.Cell>{lead?.fullName || "No Lead"}</Table.Cell>
                   <Table.Cell>{dept.employees?.length || 0}</Table.Cell>
                   <Table.Cell onClick={(e) => e.stopPropagation()}>
                     <Button
