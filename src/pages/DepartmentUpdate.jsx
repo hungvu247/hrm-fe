@@ -19,7 +19,7 @@ export default function DepartmentUpdate() {
   const { id } = useParams();
   const navigate = useNavigate();
   const departmentService = new DepartmentService();
-  const [employees, setEmployees] = useState(null);
+
   const [initialValues, setInitialValues] = useState(null);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -29,16 +29,13 @@ export default function DepartmentUpdate() {
     departmentService
       .getById(id)
       .then((res) => {
-        const data = res.data;
-        console.log("Department data:", data);
-        if (data) {
-          console.log("Employee :", data.leadEmployee.employeeId);
+        const dat = res.data;
+        console.log("Department data:", dat);
+        if (dat) {
           setInitialValues({
-            departmentId: data.departmentId,
-            departmentName: data.departmentName || "",
-            description: data.description || "",
-            leadEmployeeId: data.leadEmployee.employeeId || "", // Thêm trường LeadEmployeeId
-            employees: data.employees,
+            departmentId: dat.departmentId,
+            departmentName: dat.departmentName || "",
+            description: dat.description || "",
           });
           setLoading(false);
         }
@@ -148,45 +145,6 @@ export default function DepartmentUpdate() {
                       content={formik.errors.description}
                     />
                   )}
-
-                  {/* Display current lead employee */}
-                  <div>
-                    <strong>Current Lead Employee:</strong>{" "}
-                    {formik.values.leadEmployeeId
-                      ? formik.values.employees.find(
-                          (emp) =>
-                            emp.employeeId === formik.values.leadEmployeeId
-                        )?.fullName
-                      : "No lead assigned"}
-                  </div>
-
-                  {/* Dropdown to select new lead employee */}
-                  <Form.Select
-                    label="Select New Lead Employee"
-                    name="leadEmployeeId"
-                    options={formik.values.employees.map((emp) => ({
-                      key: emp.employeeId,
-                      text: emp.fullName,
-                      value: emp.employeeId,
-                    }))}
-                    value={formik.values.leadEmployeeId}
-                    onChange={(e, { value }) =>
-                      formik.setFieldValue("leadEmployeeId", value)
-                    }
-                    error={
-                      formik.touched.leadEmployeeId &&
-                      formik.errors.leadEmployeeId
-                    }
-                  />
-                  {formik.touched.leadEmployeeId &&
-                    formik.errors.leadEmployeeId && (
-                      <Label
-                        basic
-                        pointing
-                        color="red"
-                        content={formik.errors.leadEmployeeId}
-                      />
-                    )}
 
                   <br />
 
