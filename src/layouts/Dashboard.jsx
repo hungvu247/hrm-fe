@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { Container } from "semantic-ui-react";
+import {Container, Statistic} from "semantic-ui-react";
 
 import Navi from "./Navi";
 import Footer from "./Footer";
@@ -41,6 +41,7 @@ import DocumentEdit from "../pages/Document/DocumentEdit";
 import DashboardChart from "../pages/DashboardChart";
 import Forbidden403 from "../pages/403";
 import PerformanceStatsByProject from "../pages/PerformanceStatsByProject";
+import StatisticPerformance from "./StatisticPerformance";
 
 export default function Dashboard() {
   return (
@@ -95,6 +96,9 @@ export default function Dashboard() {
           path="/dashboard/project-statistics/:projectId"
           element={<PerformanceStatsByProject />}
         />
+        <Route path="statistic" element={<StatisticPerformance />}></Route>
+
+
       </Routes>
 
       <Footer />
