@@ -10,6 +10,11 @@
       <change beforePath="$PROJECT_DIR$/src/pages/DepartmentUpdate.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/DepartmentUpdate.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/employee/EmployeeAdd.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/employee/EmployeeAdd.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/departmentService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/departmentService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/Dashboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/Dashboard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/employee/EmployeeAdd.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/employee/EmployeeAdd.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,8 +24,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JSX File" />
         <option value="JavaScript File" />
+        <option value="JSX File" />
       </list>
     </option>
   </component>
@@ -57,6 +62,20 @@
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "D:/human-resource-managment/fe/hrm-fe",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "E:\\IDE\\WebStorm 2024.3.5\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "D:/FPTU/SU25/PRN232/FinalProject/hrm-fe",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -107,6 +126,9 @@
       <workItem from="1753173727401" duration="2459000" />
       <workItem from="1753231584859" duration="397000" />
       <workItem from="1753626275292" duration="301000" />
+      <workItem from="1753231584859" duration="1620000" />
+      <workItem from="1753283005486" duration="74000" />
+      <workItem from="1753581651735" duration="6625000" />
     </task>
     <servers />
   </component>
